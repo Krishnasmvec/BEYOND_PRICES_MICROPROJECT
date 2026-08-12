@@ -1,0 +1,464 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Outfit", ui-sans-serif, system-ui, sans-serif;
+
+  --color-agri-50: #F0FDF4;
+  --color-agri-100: #DCFCE7;
+  --color-agri-200: #BBF7D0;
+  --color-agri-400: #4ADE80;
+  --color-agri-600: #166534;
+  --color-agri-900: #064E3B;
+
+  --color-navy-800: #1E293B;
+  --color-navy-900: #0F172A;
+
+  --color-neutral-50: #F8FAFC;
+  --color-neutral-100: #F1F5F9;
+  --color-neutral-200: #E2E8F0;
+  --color-neutral-300: #CBD5E1;
+  --color-neutral-400: #94A3B8;
+  --color-neutral-500: #64748B;
+  --color-neutral-600: #475569;
+  --color-neutral-700: #334155;
+  --color-neutral-800: #1E293B;
+  --color-neutral-900: #0F172A;
+
+  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-scan: scan 3s linear infinite;
+  --animate-fade-in: fadeIn 0.5s ease-out forwards;
+  --animate-shimmer: shimmer 1.6s ease-in-out infinite;
+  --animate-badge-pulse: badgePulse 2.2s ease-in-out infinite;
+  --animate-slide-in: slideIn 0.3s ease-out forwards;
+
+  @keyframes scan {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes shimmer {
+    0% { background-position: -400px 0; }
+    100% { background-position: 400px 0; }
+  }
+  @keyframes badgePulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(22, 101, 52, 0.4); }
+    50% { box-shadow: 0 0 0 6px rgba(22, 101, 52, 0); }
+  }
+  @keyframes slideIn {
+    0% { opacity: 0; transform: translateX(12px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-neutral-50 text-neutral-900 antialiased;
+  }
+}
+
+@layer components {
+  /* ── Existing utilities ─────────────────────────────── */
+  .number-tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  .mono-label {
+    font-family: monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md border border-black/5;
+  }
+  .skeleton-shimmer {
+    @apply bg-neutral-100 animate-shimmer;
+    background-image: linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent);
+    background-size: 400px 100%;
+    background-repeat: no-repeat;
+  }
+  .hover-lift {
+    @apply transition-all duration-200;
+  }
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    @apply shadow-xl;
+  }
+  .badge-pulse {
+    @apply animate-badge-pulse rounded-full;
+  }
+
+  /* ── Farmer Design System ───────────────────────────── */
+
+  /* Data display */
+  .data-label {
+    font-family: monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #64748b;
+  }
+  .data-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #0f172a;
+    line-height: 1.3;
+  }
+  .data-value-lg {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #0f172a;
+    font-family: "Outfit", ui-sans-serif;
+    line-height: 1.1;
+  }
+  .data-unavailable {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: #94a3b8;
+    font-style: italic;
+  }
+
+  /* Reference data badge */
+  .reference-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 8px;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    font-family: monospace;
+    font-size: 8px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #64748b;
+  }
+
+  /* Risk badges */
+  .risk-badge-high {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    font-family: monospace;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background: #fff1f2;
+    color: #be123c;
+    border: 1px solid #fecdd3;
+  }
+  .risk-badge-moderate {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    font-family: monospace;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background: #fffbeb;
+    color: #b45309;
+    border: 1px solid #fde68a;
+  }
+  .risk-badge-low {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    font-family: monospace;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background: #f0fdf4;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+  }
+  .risk-badge-unavailable {
+    display: inline-flex;
+    align-items: center;
+    padding: 3px 10px;
+    font-family: monospace;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    background: #f8fafc;
+    color: #94a3b8;
+    border: 1px solid #e2e8f0;
+  }
+
+  /* Trend indicators */
+  .trend-up {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #15803d;
+  }
+  .trend-down {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #be123c;
+  }
+  .trend-stable {
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 11px;
+    font-weight: 700;
+    color: #64748b;
+  }
+
+  /* Wizard step dots */
+  .step-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #e2e8f0;
+    transition: all 0.3s ease;
+  }
+  .step-dot-active {
+    width: 24px;
+    height: 8px;
+    border-radius: 4px;
+    background: #166534;
+    transition: all 0.3s ease;
+  }
+  .step-dot-done {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #166534;
+    opacity: 0.4;
+    transition: all 0.3s ease;
+  }
+
+  /* Section heading */
+  .section-heading {
+    font-family: "Outfit", ui-sans-serif;
+    font-size: 1.0625rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: #0f172a;
+  }
+
+  /* Stat cell */
+  .stat-cell {
+    padding: 0.875rem 1rem;
+    border: 1px solid #f1f5f9;
+    background: #f8fafc;
+  }
+
+  /* Market rank badges */
+  .rank-badge-1 {
+    background: #0f172a;
+    color: white;
+    font-family: "Outfit", ui-sans-serif;
+    font-weight: 900;
+    font-size: 0.6875rem;
+    padding: 3px 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .rank-badge-2 {
+    background: #334155;
+    color: white;
+    font-family: "Outfit", ui-sans-serif;
+    font-weight: 800;
+    font-size: 0.6875rem;
+    padding: 3px 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .rank-badge-3 {
+    background: #64748b;
+    color: white;
+    font-family: "Outfit", ui-sans-serif;
+    font-weight: 800;
+    font-size: 0.6875rem;
+    padding: 3px 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Action buttons */
+  .action-btn-primary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #0f172a;
+    color: white;
+    padding: 13px 24px;
+    font-family: monospace;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .action-btn-primary:hover {
+    background: #1e293b;
+  }
+  .action-btn-primary:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+  .action-btn-secondary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: transparent;
+    color: #334155;
+    padding: 13px 24px;
+    font-family: monospace;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    border: 1px solid #e2e8f0;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .action-btn-secondary:hover {
+    border-color: #334155;
+    color: #0f172a;
+  }
+  .action-btn-secondary:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+  .action-btn-agri {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #166534;
+    color: white;
+    padding: 13px 24px;
+    font-family: monospace;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    border: none;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .action-btn-agri:hover {
+    background: #064E3B;
+  }
+  .action-btn-agri:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  /* Form fields */
+  .field-input {
+    width: 100%;
+    padding: 12px 16px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: #0f172a;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .field-input:focus {
+    border-color: #166534;
+    background: white;
+  }
+  .field-input::placeholder {
+    color: #94a3b8;
+    font-weight: 400;
+  }
+  .field-label {
+    display: block;
+    font-family: monospace;
+    font-size: 9px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #64748b;
+    margin-bottom: 6px;
+  }
+
+  /* Why bullet */
+  .why-bullet {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: #334155;
+    line-height: 1.5;
+  }
+  .why-bullet:last-child {
+    border-bottom: none;
+  }
+
+  /* Score display */
+  .score-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid #166534;
+    background: #f0fdf4;
+    font-family: "Outfit", ui-sans-serif;
+    font-weight: 900;
+    font-size: 1.25rem;
+    color: #166534;
+    flex-shrink: 0;
+  }
+
+  /* Progress bar */
+  .progress-bar {
+    height: 4px;
+    background: #e2e8f0;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: #166534;
+    transition: width 0.6s ease;
+  }
+
+  /* Animate slide-in */
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-out forwards;
+  }
+}
+
+::selection {
+  @apply bg-agri-600 text-white;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-neutral-100;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-neutral-300 rounded-full;
+}

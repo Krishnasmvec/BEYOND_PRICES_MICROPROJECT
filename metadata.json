@@ -1,0 +1,8 @@
+{
+  "name": "Harvest Profit & Logistics Planner",
+  "description": "AI-powered system helping farmers identify the best time, market, and route to sell crops for maximum profit.",
+  "requestFramePermissions": [
+    "geolocation",
+    "microphone"
+  ]
+}

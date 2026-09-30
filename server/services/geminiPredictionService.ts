@@ -1,7 +1,7 @@
 import { GoogleGenAI, Type, ThinkingLevel } from '@google/genai';
 import { env } from '../config/env.ts';
 import { UpstreamError } from '../domain/errors.ts';
-import type { UserInput, PredictionResult, ConsumerPrediction } from '../../types.ts';
+import type { UserInput, PredictionResult, ConsumerPrediction } from '../../shared/types.ts';
 
 const ai = new GoogleGenAI({ apiKey: env.GEMINI_API_KEY });
 

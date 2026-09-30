@@ -4,7 +4,7 @@ import { forwardGeocode } from '../services/geocodingService.ts';
 import { fetchNearbyMarkets, fetchMarketDetail } from '../services/marketService.ts';
 import { nominatimRateLimit } from '../middleware/rateLimiter.ts';
 import { NotFoundError, ValidationError } from '../domain/errors.ts';
-import type { MarketStall } from '../../types.ts';
+import type { MarketStall } from '../../shared/types.ts';
 
 export const marketsRouter = Router();
 

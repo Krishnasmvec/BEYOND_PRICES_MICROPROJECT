@@ -1,6 +1,6 @@
 import { supabase } from './supabaseClient.ts';
 import { UpstreamError } from '../domain/errors.ts';
-import type { PriceInsight } from '../../types.ts';
+import type { PriceInsight } from '../../shared/types.ts';
 
 // Raw row shape verified against the live Supabase project.
 interface RawPriceHistoryRow {

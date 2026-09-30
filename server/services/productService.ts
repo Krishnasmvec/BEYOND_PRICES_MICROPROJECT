@@ -1,6 +1,6 @@
 import { supabase } from './supabaseClient.ts';
 import { UpstreamError } from '../domain/errors.ts';
-import type { ProductSummary } from '../../types.ts';
+import type { ProductSummary } from '../../shared/types.ts';
 
 // Raw row shape verified against the live Supabase project (same discipline
 // as marketService.ts — explicit columns, never select=*).

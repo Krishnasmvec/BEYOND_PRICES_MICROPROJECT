@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { mintVoiceToken } from '../services/geminiLiveTokenService.ts';
 import { rateLimit } from '../middleware/rateLimiter.ts';
 import { ValidationError } from '../domain/errors.ts';
-import type { PredictionResult } from '../../types.ts';
+import type { PredictionResult } from '../../shared/types.ts';
 
 export const voiceRouter = Router();
 

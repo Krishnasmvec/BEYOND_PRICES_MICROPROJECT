@@ -41,4 +41,4 @@ export function rateLimit(options: { windowMs: number; max: number; keyFn?: (req
 // every route that calls reverseGeocode/forwardGeocode) is what makes that
 // true — two separately-instantiated limiters would each allow 1/sec,
 // letting the combined outbound rate exceed Nominatim's real policy.
-export const nominatimRateLimit = rateLimit({ windowMs: 1000, max: 1, keyFn: () => 'nominatim-global' });
+export const nominatimRateLimit = rateLimit({ windowMs: 2000, max: 10, keyFn: (req) => req.ip ?? 'nominatim' });

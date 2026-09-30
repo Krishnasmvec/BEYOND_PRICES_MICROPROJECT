@@ -1,6 +1,6 @@
 import { supabase } from './supabaseClient.ts';
 import { UpstreamError } from '../domain/errors.ts';
-import type { FarmerTransportPoolEntry } from '../../types.ts';
+import type { FarmerTransportPoolEntry } from '../../shared/types.ts';
 
 // Raw row shape verified against the live Supabase project during STEP 10 —
 // genuinely this sparse. No capacity/driver/price columns exist; never

@@ -1,6 +1,6 @@
 import type { InMemoryMarketRepository } from '../repositories/InMemoryMarketRepository.ts';
 import type { InMemoryStallRepository } from '../repositories/InMemoryStallRepository.ts';
-import type { MarketNode, MarketStall } from '../../types.ts';
+import type { MarketNode, MarketStall } from '../../shared/types.ts';
 
 // Demo seed data for farmer-side stall booking, loaded once at server boot.
 // Not re-randomized per request. This is a completely separate domain from

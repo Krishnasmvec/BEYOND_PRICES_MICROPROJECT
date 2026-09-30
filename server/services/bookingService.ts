@@ -1,6 +1,6 @@
 import { stallRepository, bookingRepository, marketRepository } from '../repositories/index.ts';
 import { NotFoundError, ConflictError, ForbiddenError } from '../domain/errors.ts';
-import type { StallBooking } from '../../types.ts';
+import type { StallBooking } from '../../shared/types.ts';
 
 export interface ClaimStallInput {
   farmerId: string;

@@ -1,5 +1,5 @@
 import { InMemoryRepository } from './types.ts';
-import type { HistoryRecord } from '../../types.ts';
+import type { HistoryRecord } from '../../shared/types.ts';
 
 const MAX_RECORDS_PER_FARMER = 50;
 

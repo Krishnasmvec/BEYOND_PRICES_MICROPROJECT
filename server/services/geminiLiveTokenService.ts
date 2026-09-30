@@ -1,7 +1,7 @@
 import { GoogleGenAI, Modality } from '@google/genai';
 import { env } from '../config/env.ts';
 import { UpstreamError } from '../domain/errors.ts';
-import type { PredictionResult } from '../../types.ts';
+import type { PredictionResult } from '../../shared/types.ts';
 
 // Ephemeral auth tokens are v1alpha-only per the SDK's own docs.
 const ai = new GoogleGenAI({ apiKey: env.GEMINI_API_KEY, httpOptions: { apiVersion: 'v1alpha' } });

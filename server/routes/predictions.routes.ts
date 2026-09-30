@@ -4,7 +4,7 @@ import { rateLimit } from '../middleware/rateLimiter.ts';
 import { attachFarmerIfPresent, requireAuth } from '../middleware/auth.ts';
 import { predictionHistoryRepository } from '../repositories/index.ts';
 import { ValidationError } from '../domain/errors.ts';
-import type { UserInput } from '../../types.ts';
+import type { UserInput } from '../../shared/types.ts';
 
 export const predictionsRouter = Router();
 

@@ -1,5 +1,5 @@
 import { InMemoryRepository } from './types.ts';
-import type { MarketStall } from '../../types.ts';
+import type { MarketStall } from '../../shared/types.ts';
 
 export class InMemoryStallRepository extends InMemoryRepository<MarketStall> {
   async findByMarket(marketId: string, status?: MarketStall['status']): Promise<MarketStall[]> {

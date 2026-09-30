@@ -1,6 +1,6 @@
 import { supabase } from './supabaseClient.ts';
 import { UpstreamError } from '../domain/errors.ts';
-import type { StorageRisk, StorageRiskLevel, MarketWeather } from '../../types.ts';
+import type { StorageRisk, StorageRiskLevel, MarketWeather } from '../../shared/types.ts';
 
 // Raw row shape verified column-by-column against the live Supabase project
 // during STEP 10 (both max_storage_days and max_days are genuinely distinct

@@ -1,5 +1,5 @@
 import { UpstreamError, ValidationError } from '../domain/errors.ts';
-import type { GeoPoint } from '../../types.ts';
+import type { GeoPoint } from '../../shared/types.ts';
 
 /**
  * Reverse-geocodes GPS coordinates to a human-readable place name.
@@ -41,6 +41,8 @@ export async function reverseGeocode(lat: number, lng: number): Promise<string> 
   }
 }
 
+const geocodeCache = new Map<string, GeoPoint>();
+
 /**
  * Forward-geocodes a free-text place name to coordinates, via the same
  * Nominatim service (no separate API/key needed). Biased to India since
@@ -51,6 +53,11 @@ export async function forwardGeocode(query: string): Promise<GeoPoint> {
   const trimmed = query.trim();
   if (!trimmed) {
     throw new ValidationError('A location is required.');
+  }
+
+  const cacheKey = trimmed.toLowerCase();
+  if (geocodeCache.has(cacheKey)) {
+    return geocodeCache.get(cacheKey)!;
   }
 
   const url = `https://nominatim.openstreetmap.org/search?format=jsonv2&q=${encodeURIComponent(trimmed)}&countrycodes=in&limit=1`;
@@ -66,7 +73,9 @@ export async function forwardGeocode(query: string): Promise<GeoPoint> {
       throw new UpstreamError(`Could not find "${trimmed}". Try a nearby city or district name.`);
     }
 
-    return { lat: parseFloat(results[0].lat), lng: parseFloat(results[0].lon) };
+    const result = { lat: parseFloat(results[0].lat), lng: parseFloat(results[0].lon) };
+    geocodeCache.set(cacheKey, result);
+    return result;
   } catch (err) {
     if (err instanceof UpstreamError) throw err;
     console.error('Forward geocoding failed:', err);

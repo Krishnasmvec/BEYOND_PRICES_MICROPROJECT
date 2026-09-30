@@ -7,7 +7,7 @@ import { nominatimRateLimit, rateLimit } from '../middleware/rateLimiter.ts';
 import { requireAuth } from '../middleware/auth.ts';
 import { analysisRepository } from '../repositories/index.ts';
 import { ValidationError } from '../domain/errors.ts';
-import type { MarketAnalysisInput, SavedAnalysis } from '../../types.ts';
+import type { MarketAnalysisInput, SavedAnalysis } from '../../shared/types.ts';
 
 export const farmerRouter = Router();
 
@@ -24,13 +24,23 @@ farmerRouter.get('/products', async (req, res) => {
   res.json(products);
 });
 
+import { forwardGeocode } from '../services/geocodingService.ts';
+import { fetchLiveWeather } from '../services/weatherService.ts';
+
 farmerRouter.get('/climate', async (req, res) => {
   const location = typeof req.query.location === 'string' ? req.query.location : undefined;
   if (!location || !location.trim()) {
     throw new ValidationError('A location is required.');
   }
-  const weather = await fetchWeatherByLocationText(location);
-  res.json({ weather });
+  try {
+    const coords = await forwardGeocode(location);
+    const weather = await fetchLiveWeather(coords.lat, coords.lng, location);
+    res.json({ weather });
+  } catch (err) {
+    console.warn(`Live climate fetching failed for location "${location}", falling back to DB:`, err);
+    const weather = await fetchWeatherByLocationText(location);
+    res.json({ weather });
+  }
 });
 
 farmerRouter.post('/analysis', analysisRateLimit, nominatimRateLimit, async (req, res) => {

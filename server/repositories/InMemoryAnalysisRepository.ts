@@ -1,5 +1,5 @@
 import { InMemoryRepository } from './types.ts';
-import type { SavedAnalysis } from '../../types.ts';
+import type { SavedAnalysis } from '../../shared/types.ts';
 
 const MAX_ANALYSES_PER_FARMER = 50;
 

@@ -1,4 +1,4 @@
-# 🌱 Harvest Profit & Logistics Planner 🚜
+# 🌱 (BEYOND PRICES) Harvest Profit & Logistics Planner 🚜
 
 **An AI-Powered Market Intelligence & Predictive Logistics Platform for Agriculture**
 
